@@ -1,0 +1,142 @@
+@import "tailwindcss";
+
+:root {
+  --wall: #F8F7F4;
+  --ink: #1C1C1C;
+  --ink-light: #6B6860;
+  --ink-faint: #B0ADA5;
+  --sienna: #C4693D;
+  --sage: #8B9D83;
+  --cream: #F0EDE6;
+  --parchment: #E8E4DB;
+}
+
+@theme inline {
+  --color-wall: var(--wall);
+  --color-ink: var(--ink);
+  --color-ink-light: var(--ink-light);
+  --color-ink-faint: var(--ink-faint);
+  --color-sienna: var(--sienna);
+  --color-sage: var(--sage);
+  --color-cream: var(--cream);
+  --color-parchment: var(--parchment);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: "Outfit", sans-serif;
+    background: var(--wall);
+    color: var(--ink);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Grain overlay for that tactile art-paper feel */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+  }
+
+  /* Serif display font class */
+  .font-display {
+    font-family: "Cormorant Garamond", "Georgia", serif;
+  }
+
+  /* Selection */
+  ::selection {
+    background: var(--sienna);
+    color: white;
+  }
+
+  /* Elegant thin scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--ink-faint);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--ink-light);
+  }
+}
+
+@layer components {
+  /* Hero video container */
+  .hero-video {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
+  .hero-video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .hero-video::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.15) 0%,
+      rgba(0, 0, 0, 0.05) 40%,
+      rgba(0, 0, 0, 0.3) 100%
+    );
+    z-index: 1;
+  }
+
+  /* Lightbox */
+  .lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(8, 8, 6, 0.96);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Horizontal rule accent */
+  .rule {
+    width: 60px;
+    height: 1px;
+    background: var(--sienna);
+  }
+
+  /* Expanding rule animation */
+  .rule-expand {
+    width: 0;
+    height: 1px;
+    background: var(--sienna);
+    animation: expandRule 0.8s ease-out forwards;
+  }
+
+  /* Image reveal clip */
+  .img-reveal {
+    clip-path: inset(0 0 0 0);
+    transition: clip-path 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+}
+
+@keyframes expandRule {
+  to {
+    width: 60px;
+  }
+}
