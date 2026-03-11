@@ -14,8 +14,8 @@ export default async function handler(req, res) {
 
     const downloadLink = "https://lapuyade.fr/download/art1.zip";
 
-    console.log("Paiement réussi pour :", email);
-
+   console.log("Paiement réussi pour :", email);
+   console.log("Lien téléchargement :", downloadLink);
   }
 
   res.status(200).json({ received: true });
