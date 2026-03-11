@@ -2,9 +2,29 @@ import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-export default async function handler(req, res) {
+export async function POST(req) {
 
-  const event = req.body;
+  const body = await req.text();
+
+  const signature = req.headers.get("stripe-signature");
+
+  let event;
+
+  try {
+
+    event = stripe.webhooks.constructEvent(
+      body,
+      signature,
+      process.env.STRIPE_WEBHOOK_SECRET
+    );
+
+  } catch (err) {
+
+    console.error("Webhook signature verification failed.", err.message);
+
+    return new Response("Webhook Error", { status: 400 });
+
+  }
 
   if (event.type === "checkout.session.completed") {
 
@@ -12,11 +32,10 @@ export default async function handler(req, res) {
 
     const email = session.customer_email || session.customer_details.email;
 
-    const downloadLink = "https://lapuyade.fr/download/art1.zip";
+    console.log("Paiement réussi pour :", email);
 
-   console.log("Paiement réussi pour :", email);
-   console.log("Lien téléchargement :", downloadLink);
   }
 
-  res.status(200).json({ received: true });
+  return Response.json({ received: true });
+
 }
