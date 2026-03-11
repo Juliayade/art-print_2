@@ -10,7 +10,7 @@ export default async function handler(req, res) {
 
     const session = event.data.object;
 
-    const email = session.customer_details.email;
+    const email = session.customer_details.email || session.customer_details.email;
 
     const downloadLink = "https://lapuyade.fr/download/art1.zip";
 
