@@ -28,5 +28,4 @@ export async function GET(request) {
 
   const file = process.env.R2_DOWNLOAD_URL;
 
-  return Response.redirect(file);
-}
+  return Response.redirect(new URL(file));
