@@ -5,9 +5,9 @@ const downloads = {
   }
 };
 
-export async function GET(request) {
+export async function GET(req) {
 
-  const { searchParams } = new URL(request.url);
+  const { searchParams } = new URL(req.url);
   const token = searchParams.get("token");
 
   const data = downloads[token];
