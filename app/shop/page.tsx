@@ -69,7 +69,7 @@ export default function ShopPage() {
 
       <div className="relative aspect-[3/4] overflow-hidden">
         <Image
-          src="/images/preview-fili.jpg"
+          src="/images/preview-fili.jpeg"
           alt="Artwork"
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-105"
