@@ -28,4 +28,9 @@ export async function GET(request) {
 
   const file = process.env.R2_DOWNLOAD_URL;
 
-  return Response.redirect(new URL(file));
+ if (!file) {
+    return new NextResponse("File not configured", { status: 500 });
+  }
+
+  return NextResponse.redirect(file);
+}
