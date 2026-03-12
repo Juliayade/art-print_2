@@ -1,4 +1,4 @@
-export const downloads = {
+const downloads = {
   "4f8a2d9e": {
     expires: Date.now() + 24 * 60 * 60 * 1000,
     count: 0
