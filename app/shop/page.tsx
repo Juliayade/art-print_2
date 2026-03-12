@@ -1,8 +1,21 @@
 "use client";
 
+async function handleCheckout() {
+
+  const res = await fetch("/api/create-checkout", {
+    method: "POST",
+  });
+
+  const data = await res.json();
+
+  window.location.href = data.url;
+
+}
+
 import Image from "next/image";
 import { motion } from "framer-motion";
 import AnimatedSection from "@/components/AnimatedSection";
+
 
 export default function ShopPage() {
   return (
@@ -47,6 +60,51 @@ export default function ShopPage() {
               concernant mes oeuvres.
             </p>
           </AnimatedSection>
+
+<AnimatedSection delay={0.6}>
+            
+  <div className="mt-16 flex justify-center">
+
+    <div className="group max-w-xs text-left">
+
+      <div className="relative aspect-[3/4] overflow-hidden">
+        <Image
+          src="/images/preview-fili.jpg"
+          alt="Artwork"
+          fill
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+      </div>
+
+      <div className="mt-4">
+        <h3 className="font-display text-lg text-ink">
+          A walk in the city
+        </h3>
+
+        <p className="mt-1 text-sm text-ink-light">
+          Digital artwork – high resolution print
+        </p>
+
+        <div className="mt-3 flex items-center justify-between">
+
+          <span className="text-sm text-sienna">
+            20 €
+          </span>
+
+          <button
+            onClick={handleCheckout}
+            className="border border-sienna px-4 py-2 text-[10px] uppercase tracking-[0.2em] text-sienna transition-all hover:bg-sienna hover:text-white"
+          >
+            Acheter
+          </button>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</AnimatedSection>
 
           <AnimatedSection delay={0.5}>
             <div className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
