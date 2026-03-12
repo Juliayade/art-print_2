@@ -1,15 +1,11 @@
 import Stripe from "stripe";
-
 import crypto from "crypto";
-
-const token = crypto.randomBytes(16).toString("hex");
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export async function POST(req) {
 
   const body = await req.text();
-
   const signature = req.headers.get("stripe-signature");
 
   let event;
@@ -34,9 +30,14 @@ export async function POST(req) {
 
     const session = event.data.object;
 
-    const email = session.customer_email || session.customer_details.email;
+    const email =
+      session.customer_email || session.customer_details.email;
 
-    const downloadLink ="https://lapuyade.fr/api/download?token=" + token;
+    // génération token unique
+    const token = crypto.randomBytes(16).toString("hex");
+
+    const downloadLink =
+      "https://lapuyade.fr/api/download?token=" + token;
 
     console.log("Paiement réussi pour :", email);
     console.log("Lien téléchargement :", downloadLink);
