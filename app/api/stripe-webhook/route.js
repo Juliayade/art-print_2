@@ -14,19 +14,14 @@ export async function POST(req) {
   let event;
 
   try {
-
     event = stripe.webhooks.constructEvent(
       body,
       signature,
       process.env.STRIPE_WEBHOOK_SECRET
     );
-
   } catch (err) {
-
-    console.error("Webhook signature verification failed.", err.message);
-
+    console.error("Webhook signature verification failed.");
     return new Response("Webhook Error", { status: 400 });
-
   }
 
   if (event.type === "checkout.session.completed") {
@@ -34,19 +29,22 @@ export async function POST(req) {
     const session = event.data.object;
 
     const email =
-      session.customer_email || session.customer_details.email;
+      session.customer_email || session.customer_details?.email;
 
-    // génération token unique
-    const token = crypto.randomBytes(16).toString("hex");
+    // 🎯 TOKEN sécurisé
+    const payload = {
+      exp: Date.now() + 24 * 60 * 60 * 1000, // 24h
+      count: 0
+    };
+
+    const token = Buffer.from(JSON.stringify(payload)).toString("base64");
 
     const downloadLink =
-      "https://lapuyade.fr/api/download?token=" + token;
+      `https://lapuyade.fr/api/download?token=${token}`;
 
-    console.log("Paiement réussi pour :", email);
-    console.log("Lien téléchargement :", downloadLink);
-
+    console.log("Paiement réussi :", email);
+    console.log("Lien de téléchargement :", downloadLink);
   }
 
   return Response.json({ received: true });
-
 }
