@@ -88,7 +88,7 @@ export default function ShopPage() {
         <div className="mt-3 flex items-center justify-between">
 
           <span className="text-sm text-sienna">
-            20 €
+            5 €
           </span>
 
           <button
