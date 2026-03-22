@@ -9,7 +9,6 @@ async function handleCheckout() {
   const data = await res.json();
 
   window.location.href = data.url;
-
 }
 
 import Image from "next/image";
