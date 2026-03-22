@@ -27,12 +27,21 @@ export default function Page() {
   const params = useParams();
 
   // ✅ FIX ICI
-  const slug = Array.isArray(params.slug)
+  const params = useParams();
+
+const slug =
+  typeof params?.slug === "string"
+    ? params.slug
+    : Array.isArray(params?.slug)
     ? params.slug[0]
-    : params.slug;
+    : null;
 
-  const artwork = artworks[slug];
+if (!slug) {
+  return <div>Slug invalide</div>;
+}
 
+const artwork = artworks[slug as keyof typeof artworks];
+ 
   if (!artwork) {
     return <div>Artwork introuvable</div>;
   }
