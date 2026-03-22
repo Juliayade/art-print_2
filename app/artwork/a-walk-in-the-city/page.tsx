@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import { useParams } from "next/navigation";
 
-// 📦 TES ŒUVRES (base de données simple)
 const artworks = {
   "a-walk-in-the-city": {
     title: "A Walk in the City",
@@ -17,17 +17,18 @@ async function handleCheckout() {
     method: "POST",
   });
 
-  
   const data = await res.json();
   window.location.href = data.url;
 }
 
-export default function Page({ params }) {
+export default function Page() {
 
-  // 🎯 récupération du slug
-  const artwork = artworks[params.slug];
+  // ✅ FIX ICI
+  const params = useParams();
+  const slug = params.slug;
 
-  // sécurité si slug invalide
+  const artwork = artworks[slug];
+
   if (!artwork) {
     return <div>Artwork introuvable</div>;
   }
@@ -36,7 +37,6 @@ export default function Page({ params }) {
     <div className="min-h-screen bg-wall px-6 py-20 text-ink">
       <div className="mx-auto max-w-5xl grid md:grid-cols-2 gap-12">
 
-        {/* IMAGE */}
         <div className="relative aspect-[3/4] overflow-hidden">
           <Image
             src={artwork.image}
@@ -46,7 +46,6 @@ export default function Page({ params }) {
           />
         </div>
 
-        {/* TEXTE */}
         <div>
           <h1 className="font-display text-3xl mb-4">
             {artwork.title}
@@ -61,10 +60,7 @@ export default function Page({ params }) {
               {artwork.price} €
             </span>
 
-            <button
-              onClick={handleCheckout}
-              className="border border-sienna px-6 py-3 text-xs uppercase tracking-[0.2em] text-sienna hover:bg-sienna hover:text-white"
-            >
+            <button onClick={handleCheckout}>
               Acheter
             </button>
           </div>
