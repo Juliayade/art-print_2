@@ -92,8 +92,10 @@ export default function ShopPage() {
           </span>
 
             <a href="/artwork/a-walk-in-the-city">
-            Acheter - Voir Produit
             </a>
+            <h3 Acheter - Voir Produit
+            </h3>
+            
             
         </div>
       </div>
