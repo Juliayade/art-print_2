@@ -91,7 +91,6 @@ export default function ShopPage() {
             5 €
           </span>
 
-          
             <a href="/artwork/a-walk-in-the-city">
             </a>
             Acheter - Voir Produit
