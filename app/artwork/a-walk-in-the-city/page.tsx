@@ -1,4 +1,5 @@
-"use client";
+
+ "use client";
 
 import Image from "next/image";
 import { useParams } from "next/navigation";
@@ -23,9 +24,12 @@ async function handleCheckout() {
 
 export default function Page() {
 
-  // ✅ FIX ICI
   const params = useParams();
-  const slug = params.slug;
+
+  // ✅ FIX ICI
+  const slug = Array.isArray(params.slug)
+    ? params.slug[0]
+    : params.slug;
 
   const artwork = artworks[slug];
 
