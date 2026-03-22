@@ -40,7 +40,7 @@ if (!slug) {
   return <div>Slug invalide</div>;
 }
 
- const artwork = artworks[slug];
+ const artwork = artworks[slug as keyof typeof artworks];
  
   if (!artwork) {
     return <div>Artwork introuvable</div>;
