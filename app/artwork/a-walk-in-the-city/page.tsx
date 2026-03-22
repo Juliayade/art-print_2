@@ -17,6 +17,7 @@ async function handleCheckout() {
     method: "POST",
   });
 
+  
   const data = await res.json();
   window.location.href = data.url;
 }
