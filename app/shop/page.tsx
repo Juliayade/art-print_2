@@ -13,6 +13,7 @@ async function handleCheckout() {
 }
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import AnimatedSection from "@/components/AnimatedSection";
 
@@ -90,11 +91,13 @@ export default function ShopPage() {
           <span className="text-sm text-sienna">
             5 €
           </span>
-
-            <a href="/artwork/a-walk-in-the-city">
-            </a>
-            <h3 Acheter - Voir Produit
-            </h3>
+          
+          <Link
+            href="/artwork/a-walk-in-the-city"
+            className="border border-sienna px-4 py-2 text-[10px] uppercase tracking-[0.2em] text-sienna transition-all hover:bg-sienna hover:text-white"
+          >
+          Acheter
+          </Link>
             
             
         </div>
