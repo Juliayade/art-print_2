@@ -24,7 +24,7 @@ async function handleCheckout() {
 
 export default function Page() {
 
-  const params = useParams();
+  
 
   // ✅ FIX ICI
   const params = useParams();
@@ -40,7 +40,7 @@ if (!slug) {
   return <div>Slug invalide</div>;
 }
 
-const artwork = artworks[slug as keyof typeof artworks];
+ const artwork = artworks[slug];
  
   if (!artwork) {
     return <div>Artwork introuvable</div>;
