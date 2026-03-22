@@ -91,10 +91,9 @@ export default function ShopPage() {
             5 €
           </span>
 
-          <button
+          
             <a href="/artwork/a-walk-in-the-city">
-            className="border border-sienna px-4 py-2 text-[10px] uppercase tracking-[0.2em] text-sienna transition-all hover:bg-sienna hover:text-white"
-          >
+           
             Acheter
           </button>
 
